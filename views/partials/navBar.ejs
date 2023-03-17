@@ -1,0 +1,36 @@
+<div id="navContainer">
+    <div class="userDetails">
+<div class="expense_total">
+    <% let expenseValue = json%>
+    <h1>Hello, <%=expenseValue[0].UserName%></h1>
+    <h1>Your Balance</h1>
+    <div class="amountDivNav">
+        <% let savings =0;%>
+        <% let investment =0;%>
+        <% let expenses =0;%>
+        <% expenseValue.forEach(function(ele){%>
+           <%if(ele.Category=='expenses'){%>
+           <% expenses+=ele.amount;%>
+           <%}else if(ele.Category=='Savings'){%>
+           <% investment+=ele.amount;%>
+          <%}else{%>
+           <% savings += ele.amount;%>
+         <% }%>
+
+
+       <% })%>
+       <% console.log(savings,investment,expenses)%>
+       <% savings = (savings/expenseValue[0].Totalamount)*100%>
+       <% investment = (investment/expenseValue[0].Totalamount)*100%>
+       <% expenses = (expenses/expenseValue[0].Totalamount)*100%>
+    <div class="expense_money">
+        <h1>₹ <%=expenseValue[0].Totalamount%></h1>
+    </div>
+    <button type="button" onclick="addBalanceShow()">Add income</button>
+</div>
+</div>
+    </div>
+    <div class="expense-chart-details">
+<canvas id="myChart" onload="showPieChart(50,20,30)" ></canvas>
+    </div>
+</div>

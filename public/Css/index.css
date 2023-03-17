@@ -1,0 +1,657 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+* {
+  font-family: "Roboto Condensed", Sans-Serif;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+:root {
+  --background: linear-gradient(138.73deg, #429690 -4.35%, #2a7c76 100.15%);
+  --white: #ffffff;
+  --user: #0188cf;
+  --primaryColor: #476a2e;
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-3: 0 4px 30px -1px rgba(0, 0, 0, 0.1),
+    0 2px 50px -1px rgba(0, 0, 0, 0.06);
+  --red-light: #f8d7da;
+  --red-dark: #842029;
+  --green-light: #d1e7dd;
+  --green-dark: #0f5132;
+  --kanbanBg: #dfe6e9;
+  --card: #0188cf;
+  --cash: #019401;
+  --expenses: #d73737;
+  --investment: hotpink;
+  --savings: darkkhaki;
+}
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+#userRoot {
+  height: 100vh;
+  width: 100vw;
+  /* background:var(--white) ; */
+}
+.imageContainer {
+  height: 100vh;
+  width: 30vw;
+  background-color: var(--user);
+}
+#userContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+#container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+.userLoginAndSignIn {
+  height: 100vh;
+  width: 80vw;
+  background-color: var(--white);
+}
+#navContainer {
+  height: 100vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  background-color:#a8e1ff;
+}
+
+.userDetails {
+  height: 50vh;
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* background: var(--background); */
+}
+.expense_total {
+  height: 40vh;
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 2vw;
+}
+.expense_total h1,
+.expense_total p {
+  color: var(--white);
+}
+.expense_money {
+  height: 5.5vh;
+  width: 8.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8vh;
+  box-shadow: 0 6px 4px #000000;
+  background-color: var(--white);
+}
+.amountDivNav{
+  height: 10vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+}
+.amountDivNav button{
+  height:5.5vh;
+  width: 7.5vw;
+  border-radius: 0.6vh;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 1.8vh;
+  background-color:#047aca;
+}
+.expense_money h1 {
+  color: #019401;
+}
+.expense-chart-details {
+  height: 50vh;
+  width: 25vw;
+  background-color: var(--background);
+}
+#myChart {
+  color: var(--white);
+  margin: 20% 0;
+}
+#content {
+  height: 100vh;
+  width: 75vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+}
+.headerDiv {
+  height: 30vh;
+  width: 75vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-left: 4vh;
+}
+.horizontal_line {
+  height: 0.2vh;
+  width: 60vw;
+  margin-left: 2vw;
+  background-color: #0b415a;
+}
+.add_expenseDiv {
+  height: 7vh;
+  width: 64vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.transaction_Div {
+  height: 63vh;
+  width: 75vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+}
+.add_expenseBtn {
+  height: 5vh;
+  width: 8vw;
+  color: var(--white);
+  background-color: var(--user);
+  border-radius: 0.7vh;
+  border: none;
+  outline: none;
+  font-size: 1.7vh;
+  margin-left: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.cancelBtn {
+  height: 5vh;
+  width: 5vw;
+  background: #656ea3;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color: #f2f4fe;
+  font-size: 1.6vh;
+}
+.buttonDiv {
+  height: 5vh;
+  width: 15vw;
+  display: flex;
+  align-self: flex-end;
+  margin-right: 2.3vw;
+  margin-top: 3vh;
+}
+.response_div {
+  height: 45vh;
+  margin-top:-7vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.emptyImage {
+  height: 30vh;
+}
+.header_Align {
+  height: 15vh;
+  width: 60vw;
+}
+.textDiv {
+  height: 10vh;
+  width: 60vw;
+  margin-left: 2vw;
+}
+.plus {
+  font-size: 1.6vh;
+}
+/* .add-expense_id{
+    align-self: flex-start;
+} */
+.addexpenseWholeContainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  position: absolute;
+}
+.add_expense_container h1 {
+  margin-left: 2vw;
+}
+.add_expense_container {
+  height: 70vh;
+  width: 37vw;
+  background-color: var(--white);
+  border-bottom-left-radius: 1vh;
+  border-bottom-right-radius: 1vh;
+  border-top: 0.5vh solid var(--user);
+  margin-left: 104vw;
+  /* transition: 2s; */
+}
+.amountInputBox {
+  background: #f7f8fd;
+}
+#labelDiv {
+  height: 5vh;
+  width: 37vw;
+  font-size: 2vh;
+  margin-left: 8.5vw;
+  margin-bottom: 1vh;
+}
+.inputBoxContainer {
+  height: 63vh;
+  width: 37vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+select,
+input {
+  height: 6vh;
+  width: 30vw;
+  font-size: 2vh;
+  outline: none;
+  border: none;
+  background: #f7f8fd;
+  margin-left: 2vw;
+}
+button {
+  cursor: pointer;
+}
+.errorForm {
+  height: 2vh;
+  display: none;
+  font-size: 2vh;
+  color: #d73737;
+}
+.expenses_Div {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+.expenses_Div::-webkit-scrollbar {
+  display: none;
+}
+.expenses_Div .element {
+  height: 20vh;
+  width: 30vw;
+  background-color: var(--white);
+  margin-top: 2vh;
+  font-size: 2vh;
+  box-shadow: var(--shadow-2);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.parentElement {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.element p,
+.element b,
+.element img {
+  margin: auto;
+}
+.Investmentpoint {
+  background-color: #ff8f00;
+  margin-left: 1vw;
+}
+.SavingsPoint {
+  background-color: #22eba8;
+  margin-left: 1vw;
+}
+.expensesPoint {
+  background-color: #373b53;
+  margin-left: 1vw;
+}
+#statusDivIdPoint {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+}
+#statusDivId {
+  height: 5vh;
+  width: 10vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 1.5vh;
+}
+.Investment {
+  color: #ff8f00;
+  border-radius: 0.5vh;
+  background-color: #fcf5ed;
+}
+.Savings {
+  color: #33d69f;
+  border-radius: 0.5vh;
+  background-color: #eafef7;
+}
+.expenses {
+  color: #373b53;
+  border-radius: 0.5vh;
+  background-color: #e2e2e4;
+}
+.arrow {
+  height: 1.8vh;
+}
+.topNavBar {
+  position: fixed;
+  margin-top: 0vh;
+  height: 7vh;
+  width: 100vw;
+  background-color: var(--white);
+  box-shadow: var(--lightShadow);
+  display: flex;
+}
+.expenseDiv {
+  height: 7vh;
+  width: 50vw;
+  gap: 0.5vw;
+  display: flex;
+  flex-direction: row;
+}
+.navLinkDiv {
+  height: 7vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 2vh;
+}
+.navLinkDiv b {
+  margin: auto;
+}
+.border {
+  border-bottom: 3px solid var(--user);
+}
+.navLinkDiv b:hover {
+  color: var(--user);
+  cursor: pointer;
+}
+.expenselogo {
+  height: 3vh;
+  margin-top: 2.5vh;
+}
+.totalAmountDiv {
+  height: 5vh;
+  width: 30vw;
+  display: flex;
+  gap: 1vw;
+  font-size: 1.8vh;
+  align-items: center;
+}
+.totalAmountDivKanaban {
+  height: 5vh;
+  width: 30vw;
+  font-size: 1.8vh;
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  margin-left: 2vw;
+}
+.borderAmount {
+  border-top: 1px solid #d9e2ec;
+}
+.categoryLogo {
+  height: 5vh;
+  width: 2.8vw;
+  border-radius: 0.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--user);
+  color: var(--white);
+  margin-left: 2vw;
+  margin-top: 1vh;
+}
+.categoryDiv {
+  height: 7vh;
+  width: 30vw;
+  display: flex;
+  gap: 2vh;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.buttonElementDiv button {
+  border: none;
+  outline: none;
+  height: 3vh;
+  width: 3vw;
+  border-radius: 0.3vh;
+  cursor: pointer;
+}
+.edit {
+  color: var(--green-dark);
+  background: var(--green-light);
+}
+.delete {
+  color: var(--red-dark);
+  background: var(--red-light);
+}
+.buttonElementDiv {
+  margin-left: 2vw;
+}
+.kanbanContainer {
+  width: 75vw;
+  margin-top: 2vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.kanbanContainer::-webkit-scrollbar {
+  display: none;
+}
+.kanbanDiv {
+  height: 63vh;
+  width: 75vw;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 100%;
+  gap: 2vw;
+  margin-left: 2vw;
+  /* overflow-x: scroll; */
+}
+.kanbanDivCategory {
+  height: 63vh;
+  width: 18vw;
+  background-color: var(--kanbanBg);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.kanbanCateBg {
+  margin-top: 1vh;
+  margin-left: 1vw;
+  height: 2.5vh;
+  width: 6vw;
+  border-radius: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+}
+.kanbanHeadingcard {
+  background-color: var(--card);
+}
+.kanbanHeadingcash {
+  background-color: var(--cash);
+}
+.kanbanHeadingexpense {
+  background-color: var(--expenses);
+}
+.kanbanHeadinginvestment {
+  background-color: var(--investment);
+}
+.kanbanHeadingsaving {
+  background-color: var(--savings);
+}
+.emptykanban {
+  height: 15vh;
+}
+.kanbanNoImg {
+  margin-top: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.kanbanCategoryHeading {
+  height: 3vh;
+  width: 9vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}
+.elementKanban {
+  height: 20vh;
+  width: 90%;
+  background-color: var(--white);
+  margin-top: 2vh;
+  font-size: 2vh;
+  box-shadow: var(--shadow-2);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.elementKanbanSavings {
+  border-top: 3px solid var(--savings);
+}
+.elementKanbanCard {
+  border-top: 3px solid var(--card);
+}
+.elementKanbanCash {
+  border-top: 3px solid var(--cash);
+}
+.elementKanbanexpenses {
+  border-top: 3px solid var(--expenses);
+}
+.elementKanbanInvestment {
+  border-top: 3px solid var(--investment);
+}
+.parentKanban {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.aboutDiv {
+  height: 63vh;
+  width: 70vw;
+  display: flex;
+  gap: 5vw;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 4vw;
+}
+.aboutGif {
+  height: 50vh;
+  width: 10vh;
+}
+.aboutText {
+  height: 50vh;
+  width: 50vh;
+  background-color: var(--white);
+  border-radius: 1vh;
+  box-shadow: var(--shadow-3);
+  padding: 2vh;
+}
+.aboutText h1 {
+  letter-spacing: 0.01vw;
+  text-align: center;
+}
+.aboutTextP {
+    line-height: 1.6;
+  letter-spacing: 0.01vw;
+  font-size: 2.5vh;
+  font-weight: 400;
+  font-family: serif;
+  padding: 0vh;
+}
+#delete_div{
+    padding: 50px;
+    height: 20vh;
+    width: 25vw;
+    color: #888EB0;
+    font-size: 1.9vh;
+    border-radius: 8px;
+    letter-spacing: 0.1vw;
+    line-height: 3vh;
+    background: #ffffff;
+    box-shadow: 0px 10px 10px -10px rgb(72 84 159 / 10%);
+    display: grid;
+    margin-top: 400vh;
+    /* grid-template-columns:; */
+       }
+       .delete_button_div button{
+        color:var(--white);
+        height:5vh;
+        width:7vw;
+        background-color:#656ea3;;
+        border:none;
+        border-radius:1vh;
+        cursor: pointer;
+        font-size: 1.7vh;
+           }
+           .delete_button_div{
+            margin-left:10vw;
+            display: flex;
+           gap: 1.5vw;
+            flex-direction: row;
+           }
+           #delete_button{
+            color: #FFFFFF;
+        background-color:var(--card);
+        cursor: pointer;
+           }
+           #delete_div h2{
+            color:black;
+            letter-spacing: 0.01vh;
+           }
+           #containerAdd{
+            margin-top: -100vh;
+            display: none;
+           }
+           #containerDelete{
+            margin-top: -200vh;
+            display: none;
+           }
+#containerBalance{
+  margin-top: -300vh;
+  display: none;
+}
+#addBalanceInput{
+  height: 5vh;
+  width: 25vw;
+  font-size: 2vh;
+    outline: none;
+    border: none;
+    background: #f7f8fd;
+    margin-bottom:  2vh;
+  }
+  .errorMsgAdd{
+    display: none;
+    color: red;
+    font-size: 1.8vh;
+    letter-spacing: 0.06vw;
+    margin-top: -1vh;
+    margin-left: 2vw;
+  }

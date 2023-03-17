@@ -1,0 +1,398 @@
+<link href="Css/index.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://kit.fontawesome.com/79b594a165.js" crossorigin="anonymous"></script>
+<link rel="shortcut icon" href="assets/download.png" type="image/x-icon">
+<div id="root">
+    <div class="topNavBar">
+        <div class="expenseDiv"><img class="expenselogo" src="/assets/download.png"/><h1>Expense</h1></div>
+        <div class="navLinkDiv">
+            <b onclick="home()" class="<%=(nav== 'home')?'border':''%>">Home</b>
+            <b onclick="Kanban()" class="<%=(nav== 'kanban')?'border':''%>">Kanban</b>
+            <b onclick="about()" class="<%=(nav== 'about')?'border':''%>">About</b>
+        </div>
+    </div>
+    <% let expenseValue = json%>
+   
+   
+    <div id="container">
+        <%- include('./partials/navBar');%>
+        <div id="content">
+            <div class="headerDiv">
+              
+              
+                <div class="header_Align">
+                    <div class="textDiv">
+                        <h1> Track Your Expense</h1>
+                    <h2>Tracking Expense 🧾</h2>
+                    </div>
+                    
+                    
+                    <div class="horizontal_line">
+                    
+                    </div>
+                </div>
+
+            </div>
+            <div class="add_expenseDiv">
+                <button class="add_expenseBtn"  id="add-expense_id" onclick="showExpenseForm()"><i class="fa-solid fa-plus plus"></i><b>Add Expense</b></button>
+            </div>
+            <% let value = ""%>
+           <div class="transaction_Div">
+           <% if(nav == 'home'){%>
+            <% if(expenseValue.length == 0){%>
+                <div class="response_div">
+                    <img src="/assets/empty_state_search_not_found_b2725_.svg" class="emptyImage"/>
+                    <h1>There is no expenses yet.</h1>
+                    <button class="add_expenseBtn" id="add-expense_id1" onclick="showExpenseForm()"><i class="fa-solid fa-plus plus"></i><b>Add Expense</b></button>
+                    </div>
+               
+            <%}else{%>
+                <div class="expenses_Div">
+                    <div class="parentElement">
+                    <% expenseValue.forEach(function(element) { %>
+                            <div class="element">
+                                <div class="categoryDiv">
+                                    <div class="categoryLogo">
+                                        <%  value = {
+    Category: element.Category,
+    AmountCategory:element.AmountCategory,
+    ExpenseDescription: element.ExpenseDescription,
+    amount:element.amount,
+    UserName:element.UserName,
+    id:element.id,
+    nav:'home'    
+                                        }%>
+                                        <h4><%=element.Category[0].toUpperCase()%></h4>
+                                    </div>
+                                    <h4><%=element.Category[0].toUpperCase()+element.Category.slice(1)%></h4>
+                                </div>
+                                
+                            
+                               <div class="totalAmountDiv">
+                                <b><%= element.ExpenseDescription%></b>
+                                <p>₹ <%=element.amount%></p>
+                               </div>
+                                 
+                                    <% value = JSON.stringify(value)%>
+                               
+                                <div class="buttonElementDiv">
+                                    <button value="edit" element='<%=value%>' nav="home" class="edit" onclick="updateData(this)">Edit</button>
+                                    <button value="delete" element='<%=value%>' nav="home" class="delete" onclick="showDelete(this)">Delete</button>
+                                </div>
+                        </div>
+
+                  <%})%>
+                </div>
+                </div>
+               
+            <%}%>
+           <%}else if(nav == 'kanban'){%>
+            <div class="kanbanContainer">
+                <div class="kanbanDiv">
+                    <div class="kanbanDivCategory cardKanban">
+                        <div class="kanbanHeadingcard kanbanCateBg"><b>Card</b></div>
+                        <div class="kanbanDivCategory">
+                        <div class="parentKanban">
+                            <% let index = 0 %>
+                            <%json.forEach(function(element){%>
+                                <%if(element.AmountCategory == 'Card'){%>
+                                    <div class="elementKanban elementKanbanCard">
+                                       
+                                        
+                                        <%  value = {
+                                            Category: element.Category,
+                                            AmountCategory:element.AmountCategory,
+                                            ExpenseDescription: element.ExpenseDescription,
+                                            amount:element.amount,
+                                            UserName:element.UserName,
+                                            id:element.id,
+                                            nav:"kanban"    
+                                                                                }%>
+                                        <div class="kanbanCategoryHeading">
+                                            <div id="statusDivIdPoint"class="kanbanHeadingcard"></div>
+                                            <b><%=element.AmountCategory[0].toUpperCase()+element.AmountCategory.slice(1)%></b>
+                                           
+                                        </div>
+                                        <div class="totalAmountDivKanaban">
+                                            <b><%= element.ExpenseDescription%></b>
+                                        <p>₹ <%=element.amount%></p>
+                                    </div>
+                                    <% value = JSON.stringify(value)%>
+                                        <div class="buttonElementDiv">
+                                    <button value="edit" element='<%=value%>'  class="edit" onclick="updateData(this)">Edit</button>
+                                    <button value="delete" element='<%=value%>'  class="delete" onclick="showDelete(this)">Delete</button>
+                                </div>
+                                </div>
+                                
+                                    <% index++%>
+
+                                <%}%>
+
+                            <%})%>
+                        </div>
+                        </div>
+                            <%if(index==0){%>
+                                <div class="kanbanNoImg">
+                                    <img src="/assets/kanban-drag-placholder_fc2df_.svg" class="emptykanban"/>
+                                </div>
+                           <% }%>
+                        
+                    </div>
+                    <div class=" kanbanDivCategory cashKanban">
+                        <div class="kanbanHeadingcash kanbanCateBg"><b>Cash</b></div>
+                        <div class="kanbanDivCategory">
+                        <div class="parentKanban">
+                            <% let index1 = 0 %>
+                            <%json.forEach(function(element){%>
+                                <%if(element.AmountCategory == 'Cash'){%>
+                                    <div class="elementKanban elementKanbanCash">
+                                        <%  value = {
+                                            Category: element.Category,
+                                            AmountCategory:element.AmountCategory,
+                                            ExpenseDescription: element.ExpenseDescription,
+                                            amount:element.amount,
+                                            UserName:element.UserName,
+                                            id:element.id,
+                                            nav:"kanban"    
+                                                                                }%>
+                                        
+                                        <div class="kanbanCategoryHeading">
+                                            <div id="statusDivIdPoint"class="kanbanHeadingCash"></div>
+                                            <b><%=element.AmountCategory[0].toUpperCase()+element.AmountCategory.slice(1)%></b>
+                                           
+                                        </div>
+                                        <div class="totalAmountDivKanaban">
+                                            <b><%= element.ExpenseDescription%></b>
+                                        <p>₹ <%=element.amount%></p>
+                                        </div>
+                                        <% value = JSON.stringify(value)%>
+                                        <div class="buttonElementDiv">
+                                    <button value="edit" element='<%=value%>'  class="edit" onclick="updateData(this)">Edit</button>
+                                    <button value="delete" element='<%=value%>'  class="delete" onclick="showDelete(this)">Delete</button>
+                                </div>
+                                </div>
+                                    <% index1++%>
+                                <%}%>
+                                  
+                                
+
+                            <%})%>
+                        </div>
+                        
+                            <%if(index1==0){%>
+                                <div class="kanbanNoImg">
+                                    <img src="/assets/kanban-drag-placholder_fc2df_.svg" class="emptykanban"/>
+                                </div>
+                           <% }%>
+                        </div>
+                    </div>
+                    <div class="kanbanDivCategory expenseKanban">
+                      
+                            <div class="kanbanHeadingexpense kanbanCateBg"><b>Expenses</b></div>
+                            
+                            <div class="kanbanDivCategory">
+                        <div class="parentKanban">
+                        <% let index2 = 0 %>
+                        <%json.forEach(function(element){%>
+                            <%if(element.Category == 'expenses'){%>
+                                <div class="elementKanban elementKanbanexpenses">
+                                    <%  value = {
+                                        Category: element.Category,
+                                        AmountCategory:element.AmountCategory,
+                                        ExpenseDescription: element.ExpenseDescription,
+                                        amount:element.amount,
+                                        UserName:element.UserName,
+                                        id:element.id,
+                                        nav:"kanban"    
+                                                                            }%>
+                                    <div class="kanbanCategoryHeading">
+                                        <div id="statusDivIdPoint"class="kanbanHeadingexpense"></div>
+                                        <b><%=element.Category[0].toUpperCase()+element.Category.slice(1)%></b>
+                                       
+                                    </div>
+                                  
+                                
+                                    <div class="totalAmountDivKanaban">
+                                        <b><%= element.ExpenseDescription%></b>
+                                    <p>₹ <%=element.amount%></p>
+                                    </div>
+                                    <% value = JSON.stringify(value)%>
+                                    <div class="buttonElementDiv">
+                                        <button value="edit"  element='<%=value%>'  class="edit" onclick="updateData(this)">Edit</button>
+                                        <button value="delete"  element='<%=value%>'  class="delete" onclick="showDelete(this)">Delete</button>
+                                    </div>
+                            </div>
+                                <% index2++%>
+
+                            <%}%>
+                       
+                        <%})%>
+                    </div>
+                    </div>
+                        <%if(index2==0){%>
+                            <div class="kanbanNoImg">
+                                <img src="/assets/kanban-drag-placholder_fc2df_.svg" class="emptykanban"/>
+                            </div>
+                       <% }%>
+                   
+                       
+                    </div>
+                    <div class="kanbanDivCategory investmentKanban">
+                        
+                        <div class="kanbanHeadinginvestment kanbanCateBg"><b>Investment</b></div>
+                        <div class="kanbanDivCategory">
+                        <div class="parentKanban">
+                            <% let index3 = 0 %>
+                            <%json.forEach(function(element){%>
+                                <%if(element.Category == 'Investment'){%>
+                                    <div class="elementKanban elementKanbanInvestment">
+                                        <%  value = {
+                                            Category: element.Category,
+                                            AmountCategory:element.AmountCategory,
+                                            ExpenseDescription: element.ExpenseDescription,
+                                            amount:element.amount,
+                                            UserName:element.UserName,
+                                            id:element.id,
+                                            nav:"kanban"    
+                                                                                }%>
+                                        
+                                    
+                                        <div class="kanbanCategoryHeading">
+                                            <div id="statusDivIdPoint"class="kanbanHeadinginvestment"></div>
+                                            <b><%=element.Category[0].toUpperCase()+element.Category.slice(1)%></b>
+                                           
+                                        </div>
+                                        <div class="totalAmountDivKanaban">
+                                            <b><%= element.ExpenseDescription%></b>
+                                        <p>₹ <%=element.amount%></p>
+                                        </div>
+                                        <% value = JSON.stringify(value)%>
+                                        <div class="buttonElementDiv">
+                                            <button value="edit"  element='<%=value%>'  class="edit" onclick="updateData(this)">Edit</button>
+                                            <button value="delete"  element='<%=value%>'  class="delete" onclick="showDelete(this)">Delete</button>
+                                        </div>
+                                </div>
+                                    <% index3++%>
+    
+                                <%}%>
+    
+                            <%})%>
+                        </div>
+                            <%if(index3==0){%>
+                                <div class="kanbanNoImg">
+                                    <img src="/assets/kanban-drag-placholder_fc2df_.svg" class="emptykanban"/>
+                                </div>
+                           <% }%>
+                       
+                            </div>
+                    </div>
+                    <div class="kanbanDivCategory savingsKanban">
+                        <div class="kanbanHeadingsaving kanbanCateBg"><b>Savings</b></div>
+                        <div class="kanbanDivCategory">
+                        <div class="parentKanban">
+                            <% let index4 = 0 %>
+                            <%json.forEach(function(element){%>
+                                <%if(element.Category == 'Savings'){%>
+                                    <div class="elementKanban elementKanbanSavings">
+                                       
+                                        <% value = {
+                                            Category: element.Category,
+                                            AmountCategory:element.AmountCategory,
+                                            ExpenseDescription: element.ExpenseDescription,
+                                            amount:element.amount,
+                                            UserName:element.UserName,
+                                            id:element.id,
+                                               nav:"kanban"                                 }%>
+                                    
+                                        <div class="kanbanCategoryHeading">
+                                            <div id="statusDivIdPoint"class="kanbanHeadingsaving"></div>
+                                            <b><%=element.Category[0].toUpperCase()+element.Category.slice(1)%></b>
+                                           
+                                        </div>
+                                        <div class="totalAmountDivKanaban">
+                                            <b><%= element.ExpenseDescription%></b>
+                                        <p>₹ <%=element.amount%></p>
+                                        </div>
+                                        <% value = JSON.stringify(value)%>
+                                        <div class="buttonElementDiv">
+                                            <button value="edit" element='<%=value%>'  class="edit" onclick="updateData(this)">Edit</button>
+                                            <button value="delete" element='<%=value%>'  class="delete" onclick="showDelete(this)">Delete</button>
+                                        </div>
+                                </div>
+                                    <% index4++%>
+    
+                                <%}%>
+    
+                            <%})%>
+                        </div>
+                            <%if(index4==0){%>
+                                <div class="kanbanNoImg">
+                                    <img src="/assets/kanban-drag-placholder_fc2df_.svg" class="emptykanban"/>
+                                </div>
+                           <% }%>
+                       
+                            </div>
+                    </div>
+                </div>
+            </div>
+<%console.log('kanban')%>
+          <% }else{%>
+            <div class="aboutDiv">
+                
+              <div class="aboutText">
+                <h1>Objective</h1>
+                <p class="aboutTextP">
+                    Clearly setting out your expenditure, from the usual monthly costs to the more spontaneous and lesser planned expenses, allows for more control over your financial well-being.</p>
+                   <p class="aboutTextP"> By being intentional in preparation and consistently tracking costs you can take comfort in managing your finances - even learn to "pay yourself first" by allocating a portion of your money to Investments & Savings</p>
+                </div>
+                <div class="aboutGif">
+                    <img src="/assets/Finance-Rise500.gif"/>
+                  </div>
+            </div>
+<% console.log('about')%>
+         <% }%>
+           
+            
+           </div>
+        </div>
+    </div>
+</div>
+<%- include('./partials/addexpense');%>
+<%- include('./partials/delete');%>
+<%- include('./partials/addBalance');%>
+<script>
+   const updateData=(value)=>{
+    let object = JSON.parse(value.getAttribute('element'));
+    console.log(object.ExpenseDescription);
+    console.log(object)
+    document.getElementsByClassName('expense_heading')[0].innerHTML='Edit expense';
+    document.getElementsByClassName('amountInputBox')[0].value=object.amount;
+    document.getElementById('category').value=object.AmountCategory;
+   let select= document.getElementById('description');
+   console.log(select.childNodes)
+   let option = select.childNodes;
+   let index = 0;
+   for(let e of option){
+if(e.value == object.ExpenseDescription && e.value!=undefined){
+    select.value=object.ExpenseDescription;
+    console.log(true);
+    index++;
+    break;
+}
+   }
+   if(index == 0){
+    let customValue = document.createElement('option');
+        customValue.value=object.ExpenseDescription
+        customValue.innerHTML=object.ExpenseDescription;
+        select.append(customValue);
+        select.value =object.ExpenseDescription;
+   }
+   let addExepense = document.getElementById('addexexpenseForm');
+   addExepense.setAttribute('expenseId',object.id);
+   addExepense.setAttribute('nav',object?.nav);
+   addExepense.value='update';
+    showExpenseForm();
+}
+</script>
+<script src="/Js/index.js"></script>
+<!-- <logo>💰</logo> -->

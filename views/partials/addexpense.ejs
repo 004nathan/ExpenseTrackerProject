@@ -1,0 +1,46 @@
+<div class="addexpenseWholeContainer" id="containerAdd">
+
+    <% let expenseValue = json%>
+    <div class="add_expense_container">
+        <h1 class="expense_heading">Create new Expense</h1>
+        
+        <div class="inputBoxContainer">
+            <div id="labelDiv">
+            <b for="number">Amount 💰</b>
+            <p>Add a amount</p>
+        </div>
+            <input type="number" class="amountInputBox" min="1"/>
+                <div id="labelDiv">
+                <b for="number">Category</b>
+                <p>Choose a category for your expense</p>
+            </div>
+           <select onchange="setCategory(this.value)" id="category">
+            <option  hidden selected>Select category</option>
+            <option value="Card">Card</option>
+            <option value="Cash">Cash</option>
+        </select>
+        <div id="labelDiv">
+            <b for="number">Description</b>
+            <p>Choose a description for your expense</p>
+        </div>
+        <select onchange="setDescription(this.value)" id="description">
+            <option  hidden selected>Select description</option>
+            <option value="HousingRent">HousingRent</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Savings">Savings</option>
+            <option value="Investment">Investment</option>
+            <option value="Custom" id="customOption" onselect="setPrompt()" >custom</option>
+    
+        </select>
+        <div class="errorForm"><p >Can’t be empty</p></div>
+        
+        <div class="buttonDiv">
+            <button type="button" class="cancelBtn" onclick="hideExpenseForm()">Cancel</button>
+            <button type="button" id="addexexpenseForm"
+            class="add_expenseBtn" value="insert" total="<%=expenseValue[0].Totalamount%>" onclick="addExpenseAndCheckValue(this,this.value)">Add expense</button>
+        </div>
+        </div>
+    </div>
+</div>
